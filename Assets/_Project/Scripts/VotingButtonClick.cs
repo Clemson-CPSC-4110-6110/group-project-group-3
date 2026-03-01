@@ -7,7 +7,7 @@ public class VotingButtonClick : MonoBehaviour
 {
     private GamePlayManager GamePlayManager; // Reference to the GamePlayManager script
 
-    public float clickCooldown = .05f; // Cooldown time in seconds
+    public float clickCooldown = 3f; // Cooldown time in seconds
     public bool canBeClicked = true; // Flag to check if the button can be clicked
 
     private void Start()
@@ -31,6 +31,7 @@ public class VotingButtonClick : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Collider entered: " + other.gameObject.name);
         if (canBeClicked)
         {
             if (other.CompareTag("YesButton"))
@@ -54,14 +55,16 @@ public class VotingButtonClick : MonoBehaviour
         {
             // Start the cooldown when the button is released
             StartCoroutine(ButtonCooldown());
+            Debug.Log("Yes Button released!");
         }
         else if (other.CompareTag("NoButton"))
         {
             // Start the cooldown when the button is released
             StartCoroutine(ButtonCooldown());
+            Debug.Log("No Button released!");
         }
     }
-
+    
     private IEnumerator ButtonCooldown()
     {
         canBeClicked = false; // Disable clicking
