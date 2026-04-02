@@ -97,3 +97,7 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Optional: local-only Wit token (duplicate Resources/SpeechToTextSettings and rename)
+Assets/_Project/Resources/SpeechToTextSettings_Local.asset
+Assets/_Project/Resources/SpeechToTextSettings_Local.asset.meta

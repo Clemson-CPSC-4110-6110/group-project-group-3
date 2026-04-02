@@ -153,10 +153,10 @@ public class XROptimizationManager : MonoBehaviour
                 ? XRDisplaySubsystem.FoveatedRenderingFlags.GazeAllowed
                 : XRDisplaySubsystem.FoveatedRenderingFlags.None;
         }
-        else
+        else if (logOptimizationInfo)
         {
-            Debug.LogWarning("[XROptimization] No XRDisplaySubsystem found. " +
-                "Foveated rendering requires an active XR session.");
+            // Normal in Editor or when playing without a headset / before XR starts.
+            Debug.Log("[XROptimization] No XR display subsystem yet — foveation skipped (expected outside an active XR session).");
         }
     }
 
