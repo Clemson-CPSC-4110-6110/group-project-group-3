@@ -11,6 +11,7 @@ TagManager:
   - PolicyCard
   - VotingBox
   - VotingStation
+  - PolicyStation
   layers:
   - Default
   - TransparentFX

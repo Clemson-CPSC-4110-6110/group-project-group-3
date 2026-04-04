@@ -1,30 +1,41 @@
 using UnityEngine;
 using System.Collections;
-using System.Linq; // For OrderByDescending
-using System.Collections.Generic; // For List<T>
+using System.Linq;
+using System.Collections.Generic;
 
 public class GamePlayManager : MonoBehaviour{
 
-    public List<IdentityData> availableIdentities; // Assign in Inspector with ScriptableObjects for each identity
+    public static GamePlayManager Instance;
+
+    // ScriptableObjects for each identity (in inspector)
+    public List<IdentityData> availableIdentities; 
 
     private int yesVotes = 0;
     private int noVotes = 0;
-    private int numPlayers = 1; // Initialze in start based on player count
+    private int numPlayers;
+
+    // Policy type determined by active govt panel
+    //public string policyType;
     private bool activeGovt = false;
 
-    public string policyType; // Initialize policy type based on chancellor card
-
+    // Board Indicators to unhide when policies are enacted
     private GameObject[] LiberalProgressTicks;
     private GameObject[] FascistProgressTicks;
-
     private int currentLiberalProgress = 0;
     private int currentFascistProgress = 0;
-
-    private int currentPresidentIndex = 0; // Start at -1 so first increment in ReassignRoles sets to 0
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (Instance == null){
+            Instance = this;
+            Debug.Log("GamePlayManager instance set.");
+        }
+        else{
+            Debug.Log("Warning: Multiple instances of GamePlayManager detected. Destroying duplicate.");
+            Destroy(gameObject);
+        }
+
         // FInd the Board Pieces
         LiberalProgressTicks = GameObject.FindGameObjectsWithTag("LiberalTick");
         FascistProgressTicks = GameObject.FindGameObjectsWithTag("FascistTick");
@@ -89,17 +100,15 @@ public class GamePlayManager : MonoBehaviour{
         // 4. Assign to Stations
         for (int i = 0; i < stationObjects.Length; i++) {
 
-            Debug.Log($"[Manager] Assigning player {i} at station {stationObjects[i].name} the role of {identityPool[i]}");
+            //Debug.Log($"[Manager] Assigning player {i} at station {stationObjects[i].name} the role of {identityPool[i]}");
 
             VotingStationController controller = stationObjects[i].GetComponentInChildren<VotingStationController>();
 
             if (controller != null) {
-                Debug.Log("Inside Controller Check");
-
                 identityType assignedType = identityPool[i];
-                Debug.Log($"[Manager] Looking for IdentityData with type {assignedType} in AvailableIdentities...");
+                //Debug.Log($"[Manager] Looking for IdentityData with type {assignedType} in AvailableIdentities...");
 
-                // SEARCH: This looks through the list you assigned in the Inspector
+                // this looks through the list you assigned in the Inspector
                 controller.identity = availableIdentities.Find(x => x != null && x.identityType == assignedType);
 
                 // Assign Roles for the start of the game
@@ -130,15 +139,14 @@ public class GamePlayManager : MonoBehaviour{
         // Once everyone has voted
         if (yesVotes + noVotes >= numPlayers){
             if (yesVotes > noVotes){
-                Debug.Log("Vote Passed! Majority said Ja.");
+                Debug.Log("Vote Passed with " + yesVotes + " Ja votes and " + noVotes + " Nein votes!");
+                Debug.Log("Activating government for policy selection.");
                 activeGovt = true;
-                EnactPolicy();
             }
             else{
-                Debug.Log("Vote Failed! Tie or majority said Nein.");
+                Debug.Log("Vote Failed with " + yesVotes + " Ja votes and " + noVotes + " Nein votes!");
                 activeGovt = false;
             }
-
             yesVotes = 0;
             noVotes = 0;
         }
@@ -146,7 +154,7 @@ public class GamePlayManager : MonoBehaviour{
 
     private void assignRoles(){
         // Random President
-        currentPresidentIndex = Random.Range(0, numPlayers); 
+        int currentPresidentIndex = Random.Range(0, numPlayers); 
     
         // Random Chancellor
         int nextChancellorIndex;
@@ -183,10 +191,14 @@ public class GamePlayManager : MonoBehaviour{
         }
     }
 
-    private void EnactPolicy(){
+    public void EnactPolicy(identityType policy){
         GameObject CurrentIndicator;
 
-        if (policyType == "Liberal"){
+        if (activeGovt == false){
+            Debug.LogError("Attempted to enact a policy without an active government!");
+            return;
+        }
+        if (policy == identityType.Liberal){
             if (currentLiberalProgress < LiberalProgressTicks.Length){
                 CurrentIndicator = LiberalProgressTicks[currentLiberalProgress].transform.GetChild(1).gameObject; // Get the child GameObject (the indicator)
                 CurrentIndicator.SetActive(true); // Activate the indicator
@@ -194,7 +206,7 @@ public class GamePlayManager : MonoBehaviour{
                 Debug.Log("Enacted a Liberal policy. Current Liberal progress: " + currentLiberalProgress);
             }
         }
-        else if (policyType == "Fascist"){
+        else if (policy == identityType.Fascist){
             if (currentFascistProgress < FascistProgressTicks.Length){
                 CurrentIndicator = FascistProgressTicks[currentFascistProgress].transform.GetChild(1).gameObject; // Get the child GameObject (the indicator)
                 CurrentIndicator.SetActive(true); // Activate the indicator
@@ -203,9 +215,16 @@ public class GamePlayManager : MonoBehaviour{
             }
         }
         else {
-            Debug.LogError("Invalid policy type: " + policyType);
+            Debug.LogError("Invalid policy type: " + policy.ToString());
         }
 
+        // Reset for next round
+        activeGovt = false; 
         assignRoles();
+    }
+
+    public bool getGovtStatus(){
+        Debug.Log($"Current government status: activeGovt = {activeGovt}");
+        return activeGovt;
     }
 }
