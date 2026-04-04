@@ -7,5 +7,4 @@ public enum PlayerRole { President, Chancellor, Civilian }
 public class IdentityData : ScriptableObject
 {
     public identityType identityType;
-    //public string roleName;
 }

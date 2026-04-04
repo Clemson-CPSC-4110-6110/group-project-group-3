@@ -73,13 +73,14 @@ public class GamePlayManager : MonoBehaviour{
     }
 
     private void initializePlayers(GameObject[] stationObjects) {
-        // 1. Sort by name so Station (0) is always the first index
+        
+        // Sort the stations for future assignment
         stationObjects = stationObjects.OrderBy(go => go.name).ToArray();
         numPlayers = stationObjects.Length;
 
         Debug.Log($"[Manager] Initializing {numPlayers} players. Sorted stations: {string.Join(", ", stationObjects.Select(s => s.name))}");
 
-        // 2. Build the Identity Pool
+        // Create a pool of identities based on number of players
         List<identityType> identityPool = new List<identityType>();
         identityPool.Add(identityType.Hitler);
         identityPool.Add(identityType.Fascist);
@@ -87,7 +88,7 @@ public class GamePlayManager : MonoBehaviour{
             identityPool.Add(identityType.Liberal);
         }
 
-        // 3. Shuffle
+        // "Shuffle cards"
         for (int i = 0; i < identityPool.Count; i++) {
             int randomIndex = Random.Range(i, identityPool.Count);
             identityType temp = identityPool[i];
@@ -97,18 +98,14 @@ public class GamePlayManager : MonoBehaviour{
 
         Debug.Log(stationObjects.Length + " stations found. Identity pool after shuffling: " + string.Join(", ", identityPool));
 
-        // 4. Assign to Stations
+        // Assign identities and roles to each station
         for (int i = 0; i < stationObjects.Length; i++) {
-
-            //Debug.Log($"[Manager] Assigning player {i} at station {stationObjects[i].name} the role of {identityPool[i]}");
-
             VotingStationController controller = stationObjects[i].GetComponentInChildren<VotingStationController>();
 
             if (controller != null) {
                 identityType assignedType = identityPool[i];
-                //Debug.Log($"[Manager] Looking for IdentityData with type {assignedType} in AvailableIdentities...");
 
-                // this looks through the list you assigned in the Inspector
+                // this looks through the list assigned in the Inspector (Identity Data Scriptables)
                 controller.identity = availableIdentities.Find(x => x != null && x.identityType == assignedType);
 
                 // Assign Roles for the start of the game
@@ -122,6 +119,7 @@ public class GamePlayManager : MonoBehaviour{
                     controller.currentRole = PlayerRole.Civilian;
                 }
 
+                // update the UI with roles and identities
                 controller.UpdateUI();
             }
         }
@@ -148,6 +146,7 @@ public class GamePlayManager : MonoBehaviour{
                 activeGovt = false;
                 assignRoles(); // Reassign roles for next round if vote fails
             }
+            // Reset vote counts for next round
             yesVotes = 0;
             noVotes = 0;
         }

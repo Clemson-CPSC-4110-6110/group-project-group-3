@@ -18,7 +18,7 @@ public class PolicyManager : MonoBehaviour
 
     public void GenerateThreePolicies() {
         cardsDiscarded = 0;
-        currentOptions.Clear();
+        currentOptions.Clear(); // Delete all current "cards"
 
         Color lightBlue = new Color(0.4f, 0.7f, 1.0f); // for liberal policies
         Color lightRed = new Color(1.0f, 0.4f, 0.4f); // for fascist policies
@@ -69,10 +69,9 @@ public class PolicyManager : MonoBehaviour
                 identityType enactedPolicy = currentOptions[i];
                 Debug.Log($"Policy Enacted: {enactedPolicy}");
                 
-                // Call your Game Manager to update the board
+                // Updates the player board
                 GamePlayManager.Instance.EnactPolicy(enactedPolicy);
                 
-                // Optional: Clear UI or prep for next round
                 cardButtons[i].SetActive(false); 
                 break;
             }
