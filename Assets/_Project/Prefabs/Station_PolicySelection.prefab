@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4997249338049990279}
   m_Layer: 0
-  m_Name: PolicyStation
+  m_Name: Station_PolicySelection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

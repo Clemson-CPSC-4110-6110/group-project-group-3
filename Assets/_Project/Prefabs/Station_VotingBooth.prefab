@@ -609,7 +609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4387568211881336378}
   m_Layer: 0
-  m_Name: VotingStation_UI
+  m_Name: Station_VotingBooth
   m_TagString: VotingStation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
