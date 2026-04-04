@@ -38,13 +38,13 @@ public class VotingButtonClick : MonoBehaviour
             {
                 // Handle the button click logic here
                 Debug.Log("Yes Button clicked!");
-                GamePlayManager.AddVotes(true); // Cast a "Yes" vote
+                //GamePlayManager.AddVotes(true); // Cast a "Yes" vote
             }
             else if (other.CompareTag("NoButton"))
             {
                 // Handle the button click logic here
                 Debug.Log("No Button clicked!");
-                GamePlayManager.AddVotes(false); // Cast a "No" vote
+                //GamePlayManager.AddVotes(false); // Cast a "No" vote
             }
         }   
     }

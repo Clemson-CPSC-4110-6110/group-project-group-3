@@ -10,6 +10,7 @@ TagManager:
   - FascistTick
   - PolicyCard
   - VotingBox
+  - VotingStation
   layers:
   - Default
   - TransparentFX
