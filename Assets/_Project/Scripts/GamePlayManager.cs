@@ -146,6 +146,7 @@ public class GamePlayManager : MonoBehaviour{
             else{
                 Debug.Log("Vote Failed with " + yesVotes + " Ja votes and " + noVotes + " Nein votes!");
                 activeGovt = false;
+                assignRoles(); // Reassign roles for next round if vote fails
             }
             yesVotes = 0;
             noVotes = 0;
