@@ -185,8 +185,8 @@ public class GamePlayManager : MonoBehaviour{
                         break;
                 }
 
-            // Force the refresh
-            controller.UpdateUI();
+                controller.UpdateUI(); // Refresh UI with new roles
+                controller.resetStation(); // Reset voted flag
             }
         }
     }
