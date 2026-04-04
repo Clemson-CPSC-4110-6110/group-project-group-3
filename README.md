@@ -14,6 +14,7 @@ Known Issues:
 Our entire team has apple laptops and we havent been able to test on the headset yet. The voting button prefabs are troublesome with the xr interactor and were tested in the scene view by transforming the button down into the trigger area. 
 
 Milestone 3 ------------------------
+
 Built a centralized GameplayManager that handles the heavy lifting: shuffling roles, counting votes, and tracking the score on the board. Each "iPad" is in sync with the manager which handles identity assignment, role transitions, and votes for hte active govt. 
 
 When a vote passes, the PolicyManager generates a random deck of three cards and letting the President/Chancellor filter them down until one is left. Once that card is picked, the manager updates the physical progress ticks on the board, resets the hasVoted indicators on everyone's station, and loops the whole thing back to the next election. The user is responsible for playing their assigned role, voting on the government, and "discarding" policies until the remaining one increments the game board. Repeat until one of either sides wins. 
