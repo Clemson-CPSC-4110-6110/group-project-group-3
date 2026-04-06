@@ -59,6 +59,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2323dcd7bf1434ba3ae9bfc83e68b080, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9031541558317757866}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2323dcd7bf1434ba3ae9bfc83e68b080, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2631521271524240195}
   m_SourcePrefab: {fileID: 100100000, guid: 2323dcd7bf1434ba3ae9bfc83e68b080, type: 3}
 --- !u!1 &119184742982786852 stripped
 GameObject:
@@ -81,5 +84,36 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
-  NetworkedBehaviours: []
+  NetworkedBehaviours:
+  - {fileID: 2631521271524240195}
   ForceRemoteRenderTimeframe: 0
+--- !u!114 &2631521271524240195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119184742982786852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ce2de50b6e34f94ae34f386c89f2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkPlayer
+  head: {fileID: 499351028423638386}
+  leftHand: {fileID: 3966221797799160825}
+  rightHand: {fileID: 159996294914093930}
+--- !u!4 &159996294914093930 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1107445694481043743, guid: 2323dcd7bf1434ba3ae9bfc83e68b080, type: 3}
+  m_PrefabInstance: {fileID: 965463798082151029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &499351028423638386 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 830924202197720839, guid: 2323dcd7bf1434ba3ae9bfc83e68b080, type: 3}
+  m_PrefabInstance: {fileID: 965463798082151029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3966221797799160825 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4209983308644567436, guid: 2323dcd7bf1434ba3ae9bfc83e68b080, type: 3}
+  m_PrefabInstance: {fileID: 965463798082151029}
+  m_PrefabAsset: {fileID: 0}
