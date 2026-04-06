@@ -19,5 +19,7 @@ Built a centralized GameplayManager that handles the heavy lifting: shuffling ro
 
 When a vote passes, the PolicyManager generates a random deck of three cards and letting the President/Chancellor filter them down until one is left. Once that card is picked, the manager updates the physical progress ticks on the board, resets the hasVoted indicators on everyone's station, and loops the whole thing back to the next election. The user is responsible for playing their assigned role, voting on the government, and "discarding" policies until the remaining one increments the game board. Repeat until one of either sides wins. 
 
+Basic multiplayer networking foundation using Photon Fusion in shared mode was created. Each player is assigned proper ownership, ensuring they only control their own character. This system establishes the core infrastructure needed for real time interaction and will support future features such as voice communication, gameplay mechanics, and synchronized interactions.
+
 Known Issues:
 Inability to test on the headset. 
