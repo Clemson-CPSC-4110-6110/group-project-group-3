@@ -1,9 +1,11 @@
 ﻿<Solution>
+  <Project Path="Fusion.Unity.Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="LeanCommon.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.InteractionSimulator.csproj" />
   <Project Path="Tayx.Graphy.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="CW.Common.csproj" />
+  <Project Path="Fusion.Unity.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.Hands.csproj" />
   <Project Path="Unity.XR.Hands.Samples.VisualizerSample.csproj" />
@@ -14,5 +16,6 @@
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.WorldSpaceUI.Editor.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.InteractionSimulator.Editor.csproj" />
+  <Project Path="Unity.Fusion.CodeGen.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.WorldSpaceUI.csproj" />
 </Solution>
